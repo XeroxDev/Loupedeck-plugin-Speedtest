@@ -1,7 +1,7 @@
 // .versionrc.js
 const tracker = [
     {
-        filename: './YTMDesktopPlugin/Properties/AssemblyInfo.cs',
+        filename: './SpeedtestPlugin/Properties/AssemblyInfo.cs',
         updater: require('./standard-version-updater/AssemblyInfo.js')
     },
     {

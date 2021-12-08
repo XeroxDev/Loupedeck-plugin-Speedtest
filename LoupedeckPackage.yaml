@@ -1,6 +1,6 @@
 ﻿type: plugin4
-name: YTMDesktop
-displayName: YTMDesktop
+name: Speedtest
+displayName: Speedtest
 version: 1.0.0
 author: XeroxDev
 copyright: Copyright (c) 2021 Dominic Ris
@@ -9,6 +9,6 @@ supportedDevices:
   - LoupedeckCt
   - LoupedeckLive
 
-pluginFileName: YTMDesktopPlugin.dll
+pluginFileName: SpeedtestPlugin.dll
 pluginFolderWin: ./bin/win/
 pluginFolderMac: ./bin/mac/
