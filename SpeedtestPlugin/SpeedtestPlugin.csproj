@@ -72,19 +72,5 @@
         <EmbeddedResource Include="Resources\Icon\icon-32.png" />
         <EmbeddedResource Include="Resources\Icon\icon-48.png" />
     </ItemGroup>
-    <ItemGroup>
-      <Content Include="..\.versionrc.js">
-        <Link>SpeedtestPlugin\.versionrc.js</Link>
-      </Content>
-      <Content Include="..\commitlint.config.js">
-        <Link>SpeedtestPlugin\commitlint.config.js</Link>
-      </Content>
-      <Content Include="..\LICENSE">
-        <Link>SpeedtestPlugin\LICENSE</Link>
-      </Content>
-      <Content Include="..\LoupedeckPackage.yaml">
-        <Link>SpeedtestPlugin\LoupedeckPackage.yaml</Link>
-      </Content>
-    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
