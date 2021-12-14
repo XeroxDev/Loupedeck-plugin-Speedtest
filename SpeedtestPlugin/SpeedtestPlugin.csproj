@@ -16,9 +16,11 @@
     <PropertyGroup>
         <BaseIntermediateOutputPath>$(SolutionDir)obj\</BaseIntermediateOutputPath>
         <BaseOutputPath>$(SolutionDir)bin\</BaseOutputPath>
-        <OutputPath>C:\Users\domin\AppData\Local\Loupedeck\Plugins</OutputPath>
+        <OutputPath>$(BaseOutputPath)$(Configuration)\</OutputPath>
+        <LibZPath>$(SolutionDir)packages\LibZ.Tool.1.2.0.0\tools\libz.exe</LibZPath>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <OutputPath>$(LocalAppData)\Loupedeck\Plugins\$(AssemblyName)\</OutputPath>
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
@@ -30,6 +32,19 @@
         <Optimize>true</Optimize>
         <DebugSymbols>false</DebugSymbols>
         <DebugType>None</DebugType>
+        <OutputPath>$(BaseOutputPath)win\</OutputPath>
+        <PostBuildEvent>
+            cd $(OutputPath)
+            dir /s /b
+            del *.xml
+            del *.config
+            $(LibZPath) inject-dll --assembly $(AssemblyName).dll --include *.dll --exclude $(AssemblyName).dll --move
+            cd $(SolutionDir)
+            PowerShell -command Remove-Item .\Installer -Recurse -ErrorAction Ignore
+            PowerShell -command New-Item -Path .\Installer -ItemType Directory
+            PowerShell -command Compress-Archive -Path $(SolutionDir)LoupedeckPackage.yaml,$(SolutionDir)bin -DestinationPath $(SolutionDir)Installer\$(AssemblyName).zip -CompressionLevel Fastest -Force
+            PowerShell -command Rename-Item -Path .\Installer\$(AssemblyName).zip -newName $(AssemblyName).lplug4
+        </PostBuildEvent>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
@@ -65,6 +80,7 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config" />
+        <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Include="Resources\Icon\icon-16.png" />
